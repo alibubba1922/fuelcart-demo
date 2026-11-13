@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link id="handFont" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap">
 <meta name="theme-color" content="#ff6a00"><title>FuelCart – Demo</title>
 <style>
 :root{--or:#ff6a00;--bk:#0d0d0d;--wh:#fff;--st:#0071ce}
@@ -59,11 +61,16 @@ select,input[type=text],input:not([type]){padding:9px;border-radius:8px;border:2
 #musPrevWrap{display:flex;align-items:center;gap:8px;margin:8px 0 4px;font-size:13px}
 #renewM{position:fixed;inset:0;background:#000a;display:none;align-items:center;justify-content:center;z-index:25;padding:16px}#renewM .box{background:#fff;color:#111;border-radius:16px;max-width:360px;width:100%;padding:20px;text-align:center;box-shadow:0 10px 30px #0006}#renewM h2{margin:0 0 6px;font-size:20px}#renewM .pr{font-size:28px;font-weight:800;margin:6px 0}#renewM button{width:100%;margin-top:8px}
 #roastB{position:fixed;left:50%;bottom:calc(88px + env(safe-area-inset-bottom));top:auto;transform:translateX(-50%);max-width:340px;width:calc(100% - 32px);max-height:30vh;overflow:hidden;background:#111;color:#fff;border:3px solid var(--or);border-radius:16px;padding:12px 14px;font-weight:800;font-size:17px;line-height:1.3;text-align:center;z-index:15;opacity:1;pointer-events:none;display:none;box-shadow:0 8px 24px #0006}#roastB:after{content:"";position:absolute;left:50%;bottom:-8px;margin-left:-8px;border:8px solid transparent;border-bottom:0;border-top-color:#111}
+.handwritten{font-family:'Patrick Hand','Indie Flower','Segoe Print','Bradley Hand','Chalkboard SE','Comic Sans MS',cursive;font-size:20px;letter-spacing:.2px}
+input.handwritten::placeholder{font-family:'Patrick Hand','Indie Flower','Segoe Print','Bradley Hand','Chalkboard SE','Comic Sans MS',cursive;font-size:19px}
+#pantry{list-style:none;padding:0;margin:10px 0}#pantry li{display:flex;align-items:center;gap:8px;padding:8px 6px;border-bottom:1px solid #ddd;border-left:6px solid var(--or)}#pantry li span{flex:1}#pantry li.done span{text-decoration:line-through;color:#888}
+#panMic{width:48px;min-width:48px;font-size:22px;padding:0}#panMic.rec{background:#e31837;color:#fff}
+#pantryM{position:fixed;inset:0;background:#000a;display:none;align-items:center;justify-content:center;z-index:24;padding:16px}#pantryM .box{background:#fff;color:#111;border:4px solid var(--or);border-radius:16px;max-width:360px;width:100%;padding:20px;text-align:center;box-shadow:0 10px 30px #0006}#pantryM h2{margin:0 0 8px;font-size:20px}#pantryM button{width:100%;margin-top:8px}
 </style></head><body>
 <div id="splash" role="button" aria-label="Continue"><h1 id="splashName"></h1></div>
 <header><h1 id="appName"></h1><span><span class="storechip"></span> <span id="storeLbl" style="font-size:13px"></span></span></header>
 <div class="banner" id="priceBanner">$0.99/year · renews yearly · 7-day free trial in this demo · nutrition swaps, health tips &amp; weight tracking included</div>
-<nav><button data-p="cartP" class="on">🛒 Cart</button><button data-p="listP">📝 List</button><button data-p="recP">🥗 Recipes</button><button data-p="goalP">🎯 Goals</button><button data-p="teamP">👥 Team</button></nav>
+<nav><button data-p="cartP" class="on">🛒 Cart</button><button data-p="listP">📝 List</button><button data-p="pantryP">🏠 Pantry</button><button data-p="recP">🥗 Recipes</button><button data-p="goalP">🎯 Goals</button><button data-p="teamP">👥 Team</button></nav>
 <main>
 <div class="page on" id="cartP">
 <section class="card"><h2>Store</h2>
@@ -83,9 +90,14 @@ select,input[type=text],input:not([type]){padding:9px;border-radius:8px;border:2
 </div>
 <div class="page" id="listP"><section class="card"><h2>Grocery list</h2>
 <button id="mic" aria-label="Start voice list">🎤</button><div id="interim"></div><div id="micMsg" class="note" style="text-align:center"></div>
-<div style="display:flex;gap:4px;margin-top:8px"><input id="listIn" type="text" placeholder="Type items: milk, eggs and bread" style="flex:1"><button id="listAdd">Add</button></div>
-<ul id="list"></ul><button class="alt" id="listClear">Clear checked</button>
+<div style="display:flex;gap:4px;margin-top:8px"><input id="listIn" class="handwritten" type="text" placeholder="Type items: milk, eggs and bread" style="flex:1"><button id="listAdd">Add</button></div>
+<ul id="list" class="handwritten"></ul><button class="alt" id="listClear">Clear checked</button>
 <p class="note">Say items separated by "and", commas or a pause. Voice works in Chrome/Edge/Samsung Internet (Android) and Safari 14.1+ on iPhone (needs Siri &amp; Dictation on); not in Firefox. Typed entry always works. Scanning an item ticks it off.</p></section></div>
+<div class="page" id="pantryP"><section class="card"><h2>🏠 Pantry — already at home</h2>
+<div style="display:flex;gap:4px"><input id="panIn" type="text" placeholder="e.g. soy sauce, ketchup and milk" style="flex:1"><button id="panAdd">Add</button><button id="panMic" aria-label="Voice add pantry items">🎤</button></div>
+<div id="panMsg" class="note"></div><div id="panInterim" class="note"></div>
+<ul id="pantry"></ul><button class="alt" id="panClear">Remove checked</button>
+<p class="note">Tick an item when it's used up. When you scan or add something you already have, FuelCart asks first so you don't buy a duplicate.</p></section></div>
 <div class="page" id="recP"><section class="card" id="fuel"><h2>🏋️ Training fuel</h2>
 <p><b>Before (1–3 h):</b> carbs + some protein, low fat/fibre — e.g. oats with banana, toast with PB, yogurt + fruit.</p>
 <p><b>During (60 min+ or hot):</b> water; a sports drink only for long or intense sessions.</p>
@@ -109,6 +121,7 @@ select,input[type=text],input:not([type]){padding:9px;border-radius:8px;border:2
 <div id="bar" role="region" aria-label="Cart totals"><button type="button" id="cartFab" aria-label="Open cart"><svg class="bagSvg" viewBox="0 0 64 64" aria-hidden="true"><rect x="12" y="22" width="40" height="32" rx="8" fill="#0d0d0d"/><path d="M22 22v-6a10 10 0 0 1 20 0v6" fill="none" stroke="#0d0d0d" stroke-width="5" stroke-linecap="round"/><rect x="18" y="26" width="28" height="22" rx="5" fill="#fff"/></svg><span id="cartCount">0</span><span id="cartFabTot">$0.00</span></button><div>Subtotal<b id="bSub">$0.00</b></div><div>Tax<b id="bTax">$0.00</b></div><div class="t">Total<b id="bTot">$0.00</b></div></div>
 <div id="renewM" role="dialog" aria-modal="true" aria-labelledby="renewT"><div class="box"><h2 id="renewT">Renew FuelCart for $0.99/year</h2><div class="pr">$0.99/year</div><p id="renewMsg" class="note">Your free trial has ended. Renew to keep scanning, swaps and weight tracking.</p><button class="big" id="renewYes">Renew</button><button class="big alt" id="renewLater">Later</button><p class="note">Demo — billing via Google Play in the release build. No payment is taken here.</p></div></div>
 <div id="roastB" role="status" aria-live="polite"></div>
+<div id="pantryM" role="alertdialog" aria-modal="true" aria-labelledby="pantryMsg"><div class="box"><h2 id="pantryMsg"></h2><p class="note" id="pantryProd"></p><button class="big" id="pantryAdd">Add anyway</button><button class="big alt" id="pantrySkip">Skip</button></div></div>
 <div id="toast"></div>
 <div id="ov"><div class="frame"><video id="vid" playsinline muted autoplay></video></div>
 <p style="color:#fff" id="ovMsg">Point the camera at a barcode…</p>
@@ -201,10 +214,12 @@ async function commitAdd(item,opts){opts=opts||{};
  cart.push(item);if(opts.sound)kazoo(opts.sound);buzz();const rl=opts.roast&&roastOn()?pickRoast(opts.roast):null;if(rl){showRoast(rl);if(opts.swap){const sw=opts.swap;setTimeout(()=>showSwap(sw),roastMs())}}else if(opts.swap)showSwap(opts.swap);if(opts.tick)tickList(item.n);if(opts.toast)toast(opts.toast);render();
  const fab=$("cartFab");if(fab){fab.classList.remove("pop");void fab.offsetWidth;fab.classList.add("pop")}}
 async function lookup(raw){const code=norm(raw);const d=P[code];
- if(d){const item={code,n:d.n,e:d.e,p:d.p[store()],tax:d.tax,v:d.v,cal:d.cal,demo:true,isNew:true};
+await Promise.resolve();
+ if(d){if(!(await pantryGate(d.n)))return;const item={code,n:d.n,e:d.e,p:d.p[store()],tax:d.tax,v:d.v,cal:d.cal,demo:true,isNew:true};
   return commitAdd(item,{src:imgFor(code),sound:score(d)>0?"happy":"sad",roast:score(d)>0?null:code,swap:d,tick:true,toast:`${score(d)>0?"🎉":"😬"} Added ${d.e} ${d.n.split(" ").slice(0,3).join(" ")}`})}
  let name="Item "+code;
  try{const r=await fetch(`https://world.openfoodfacts.org/api/v2/product/${code.padStart(13,"0")}.json?fields=product_name,brands,image_front_small_url`);const j=await r.json();if(j.product&&j.product.product_name)name=(j.product.brands?j.product.brands.split(",")[0]+" ":"")+j.product.product_name;const iu=j.product&&j.product.image_front_small_url;if(iu){try{localStorage.setItem("fc_img_"+code,iu)}catch(e){}if(window.caches)caches.open("fc-img").then(c=>c.add(new Request(iu,{mode:"no-cors"}))).catch(()=>{})}}catch(e){}
+if(!(await pantryGate(name)))return;
  const v=prompt(`${name}\nNot in our price list — what's the shelf price?`,"");
  if(v===null)return;const trimmed=String(v).trim();if(!trimmed)return;const p=parseFloat(trimmed.replace(/[^0-9.]/g,""));if(isNaN(p))return;
  const item={code,n:name,e:"📦",p:Math.max(0,r2(p)),tax:12,v:null,cal:0,isNew:true};
@@ -304,20 +319,47 @@ const LK="fuelcart_list_v1";let list=[];try{list=JSON.parse(localStorage.getItem
 function saveList(){try{localStorage.setItem(LK,JSON.stringify(list))}catch(e){}}
 function splitItems(t){return t.split(/\s*(?:,|;|\.|\band\b|\bthen\b|\balso\b)\s*/i).map(s=>s.replace(/^(i need|i want|get|pick up|buy|some|a|an)\s+/i,"").trim()).filter(s=>s.length>1)}
 function addItems(t){splitItems(t).forEach(x=>list.push({t:x,d:false}));saveList();renderList()}
-function renderList(){$("list").innerHTML=list.map((x,i)=>`<li class="${x.d?'done':''}"><input type="checkbox" ${x.d?'checked':''} onchange="list[${i}].d=this.checked;saveList();renderList()"><span contenteditable="true" onblur="list[${i}].t=this.textContent.trim();saveList()">${x.t.replace(/</g,"&lt;")}</span><button class="alt" onclick="list.splice(${i},1);saveList();renderList()">✕</button></li>`).join("")||'<li class="note">No items yet — tap the mic or type.</li>'}
+function renderList(){$("list").innerHTML=list.map((x,i)=>`<li class="handwritten${x.d?' done':''}"><input type="checkbox" ${x.d?'checked':''} onchange="list[${i}].d=this.checked;saveList();renderList()"><span contenteditable="true" onblur="list[${i}].t=this.textContent.trim();saveList()">${x.t.replace(/</g,"&lt;")}</span><button class="alt" onclick="list.splice(${i},1);saveList();renderList()">✕</button></li>`).join("")||'<li class="note">No items yet — tap the mic or type.</li>'}
 function tickList(name){const n=name.toLowerCase();let hit=false;list.forEach(x=>{if(x.d)return;const w=x.t.toLowerCase().split(/\s+/).filter(w=>w.length>=3).map(w=>w.replace(/s$/,""));if(w.length&&w.some(k=>n.includes(k))){x.d=true;hit=true}});if(hit){saveList();renderList()}}
 $("listAdd").onclick=()=>{if($("listIn").value.trim()){addItems($("listIn").value);$("listIn").value=""}};
 $("listIn").addEventListener("keydown",e=>{if(e.key==="Enter")$("listAdd").click()});
 $("listClear").onclick=()=>{list=list.filter(x=>!x.d);saveList();renderList()};
 const SR=window.SpeechRecognition||window.webkitSpeechRecognition;let rec=null,recOn=false;
 if(!SR){$("micMsg").textContent="Voice input isn't supported in this browser (e.g. Firefox, or iOS with dictation off). Type your list below.";$("mic").disabled=true}
-$("mic").onclick=()=>{if(!SR)return;if(recOn){rec.stop();return}
+function startVoice(btnId,msgId,interimId,onFinal,typeHint){if(!SR)return;if(recOn){rec.stop();return}
  rec=new SR();rec.lang="en-CA";rec.continuous=true;rec.interimResults=true;
- rec.onstart=()=>{recOn=true;$("mic").classList.add("rec");$("micMsg").textContent="Listening… say items, pause between them. Tap to stop."};
- rec.onresult=e=>{let interim="";for(let i=e.resultIndex;i<e.results.length;i++){const r=e.results[i];if(r.isFinal)addItems(r[0].transcript);else interim+=r[0].transcript}$("interim").textContent=interim};
- rec.onerror=e=>{$("micMsg").textContent=e.error==="not-allowed"?"Microphone permission denied — allow it or type below.":"Voice error: "+e.error+" — try again or type below."};
- rec.onend=()=>{recOn=false;$("mic").classList.remove("rec");$("interim").textContent=""};
- try{rec.start()}catch(e){$("micMsg").textContent="Couldn't start voice: "+e.message}};
+ rec.onstart=()=>{recOn=true;$(btnId).classList.add("rec");$(msgId).textContent="Listening… say items, pause between them. Tap to stop."};
+ rec.onresult=e=>{let interim="";for(let i=e.resultIndex;i<e.results.length;i++){const r=e.results[i];if(r.isFinal)onFinal(r[0].transcript);else interim+=r[0].transcript}$(interimId).textContent=interim};
+ rec.onerror=e=>{$(msgId).textContent=e.error==="not-allowed"?"Microphone permission denied — allow it or "+typeHint+".":"Voice error: "+e.error+" — try again or "+typeHint+"."};
+ rec.onend=()=>{recOn=false;$(btnId).classList.remove("rec");$(interimId).textContent=""};
+ try{rec.start()}catch(e){$(msgId).textContent="Couldn't start voice: "+e.message}}
+$("mic").onclick=()=>startVoice("mic","micMsg","interim",t=>addItems(t),"type below");
+/* ---------- PANTRY (already at home) ---------- */
+const PK="fuelcart_pantry_v1";let pantry=[];try{const pj=JSON.parse(localStorage.getItem(PK));if(Array.isArray(pj))pantry=pj.filter(x=>x&&typeof x.t==="string"&&x.t.trim()).map(x=>({t:x.t.trim(),d:!!x.d}))}catch(e){}
+function savePantry(){try{localStorage.setItem(PK,JSON.stringify(pantry))}catch(e){}}
+function addPantry(t){let n=0;splitItems(String(t||"")).forEach(x=>{x=x.trim();if(!x)return;const k=x.toLowerCase();const ex=pantry.find(p=>p.t.toLowerCase()===k);if(ex){ex.d=false;return}pantry.push({t:x,d:false});n++});savePantry();renderPantry();return n}
+function renderPantry(){const el=$("pantry");if(!el)return;el.innerHTML=pantry.map((x,i)=>`<li class="${x.d?'done':''}"><input type="checkbox" aria-label="Used up" ${x.d?'checked':''} onchange="usePantry(${i},this.checked)"><span>${esc(x.t)}</span><button class="alt" aria-label="Remove" onclick="removePantry(${i})">✕</button></li>`).join("")||'<li class="note">Nothing yet — type or tap the mic: "soy sauce, ketchup and milk".</li>'}
+function usePantry(i,on){if(pantry[i]){pantry[i].d=!!on;savePantry();renderPantry()}}
+function removePantry(i){if(i>=0&&i<pantry.length){pantry.splice(i,1);savePantry();renderPantry()}}
+function pToks(s){return String(s).toLowerCase().replace(/[^a-z0-9]+/g," ").trim().split(" ").filter(Boolean)}
+function tokEq(a,b){if(a===b)return true;const pl=(x,y)=>y===x+"s"||y===x+"es"||(x.endsWith("y")&&y===x.slice(0,-1)+"ies");return pl(a,b)||pl(b,a)}
+function pantryMatch(name){const nt=pToks(name);if(!nt.length)return null;
+ for(const p of pantry){if(p.d)continue;const pt=pToks(p.t);if(!pt.length)continue;
+  for(let i=0;i+pt.length<=nt.length;i++){if(pt.every((w,j)=>tokEq(w,nt[i+j])))return p}}
+ return null}
+let pantryPending=null;
+function pantryGate(name){const m=pantryMatch(name);if(!m)return Promise.resolve(true);
+ if(pantryPending)pantryPending(false);
+ return new Promise(res=>{const M=$("pantryM");$("pantryMsg").textContent=`You already have ${m.t} at home`;$("pantryProd").textContent=`Adding: ${name}`;M.style.display="flex";(window.__seq=window.__seq||[]).push("pantry");
+  const done=v=>{M.style.display="none";pantryPending=null;if(!v)toast("Skipped — already at home");res(v)};pantryPending=done;
+  $("pantryAdd").onclick=()=>done(true);$("pantrySkip").onclick=()=>done(false)})}
+$("panAdd").onclick=()=>{const v=$("panIn").value;if(v.trim()){addPantry(v);$("panIn").value=""}};
+$("panIn").addEventListener("keydown",e=>{if(e.key==="Enter")$("panAdd").click()});
+$("panClear").onclick=()=>{pantry=pantry.filter(x=>!x.d);savePantry();renderPantry()};
+if(!SR){$("panMsg").textContent="Voice isn't supported in this browser — type items above.";$("panMic").disabled=true}
+$("panMic").onclick=()=>startVoice("panMic","panMsg","panInterim",t=>addPantry(t),"type above");
+renderPantry();
+window.__pantry={add:addPantry,match:pantryMatch,gate:pantryGate,list:()=>pantry,PK};
 /* ---------- AVATARS (generated sprite panels) ---------- */
 const AVATAR_IMG={
 "maya_soft_1":"data:image/webp;base64,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",
