@@ -238,6 +238,10 @@ function expandOFF(r){const[code,cat,name,brand,qty,cal,basis,prot,net,ip,sb,ns]
  const sw=kind==="staple"?[]:(CAT_SWAPS[cat]||CAT_SWAPS.other);
  return{code,obj:{kind,cat,prot:+prot||0,net:+net||0,iu:ip?OFF_IMG_BASE+ip:"",n:nm,e:c[0],tax:c[1],cal:+cal||0,calSrc:"OFF "+code+(basis==="serving"?" (per serving)":" (per 100 g/mL)"),v:true,estimate:true,p,r:{},off:"https://world.openfoodfacts.org/product/"+code,storeBrand:sb||"",swap:sw}}}
 OFF_ROWS.forEach(r=>{const x=expandOFF(r);if(!P[x.code])P[x.code]=x.obj});
+/* Pre-launch sweep 2026-11-16 (~05:21-05:24 PST): catalogue items re-tried on walmart.ca public search (curl, __NEXT_DATA__, 5 s apart; the next 2 queries came back empty, so we stopped). Only matching brand+size rows are used; every other catalogue price stays an ESTIMATE. */
+const CAT_VERIFIED={"068700011016":{walmart:{p:5.81,u:"https://www.walmart.ca/en/ip/Dairyland-2-Partly-Skimmed-Milk/10183990",sz:"4 L (15.0¢/100 mL)",st:"verified",note:"was est. $9.49",d:"2026-11-16"}},"059000003115":{walmart:{p:2.47,u:"https://www.walmart.ca/en/ip/Carnation-Evaporated-Milk-354mL/6000195391449",sz:"354 mL",st:"verified",note:"was est. $1.89",d:"2026-11-16"}},"064420255013":{walmart:{p:6.28,u:"https://www.walmart.ca/en/search?q=natrel%202%25%20milk%202%20l",sz:"2 L (Natrel Lactose Free 2%)",st:"verified",note:"was est. $4.89",d:"2026-11-16"}}};
+Object.entries(CAT_VERIFIED).forEach(([c,o])=>{const d=P[c];if(!d)return;d.r=d.r||{};Object.entries(o).forEach(([s,x])=>{d.p[s]=x.p;d.r[s]={u:x.u,sz:x.sz,st:x.st,note:x.note,d:x.d}})});
+
 /* PRODUCE, LOOSE & BULK ITEMS (no barcode): quick-pick, ESTIMATE ONLY (typical BC shelf prices, not read from any store).
    u:"kg" opens the weight screen (kg/lb toggle, 1 kg = 2.20462 lb); u:"each" adds one. Tax follows the item's category (basic groceries 0%, candy 12%, supplements 5%). */
 const LB_PER_KG=2.20462;
@@ -796,7 +800,7 @@ function sayRoast(text){window.__rseq.push("speak");if(!roastOn()||!voiceOn())re
 const SWAP_TAX={"Coca-Cola Zero Sugar 355 mL":12,"Red Bull Sugarfree 250 mL":12,"Sparkling water with lime":5,"Gatorade Zero 591 mL":5};
 let rsTarget=null,rsList=[];
 function showSwapCard(item,d){window.__rseq.push("swapcard");const el=$("rSwap");if(!el||!d)return;const L=swapsFor(d).slice(0,proOn()?2:1);rsTarget=item;rsList=L;if(!L.length){el.style.display="none";return}
- el.innerHTML=`<button type="button" class="rsX" onclick="hideSwapCard()" aria-label="Close">✕</button><b>💡 Try this instead${proOn()?"":" (free pick)"}</b>`+L.map((x,i)=>`<div class="rsRow"><span>→ ${esc(x[0])} · ${x[1]} cal${SWAP_PRICE[x[0]]!=null?" · ~"+fmt(SWAP_PRICE[x[0]]):""}</span><button type="button" class="swapIt" data-i="${i}" onclick="swapIt(${i})">Swap it</button></div>`).join("")+(proOn()||kidsOn()?"":`<div class="note">More swaps + health tips with Pro</div>`);
+ el.innerHTML=`<button type="button" class="rsX" onclick="hideSwapCard()" aria-label="Close">✕</button><b>💡 Try this instead${proOn()||kidsOn()?"":" (free pick)"}</b>`+L.map((x,i)=>`<div class="rsRow"><span>→ ${esc(x[0])} · ${x[1]} cal${SWAP_PRICE[x[0]]!=null?" · ~"+fmt(SWAP_PRICE[x[0]]):""}</span><button type="button" class="swapIt" data-i="${i}" onclick="swapIt(${i})">Swap it</button></div>`).join("")+(proOn()||kidsOn()?"":`<div class="note">More swaps + health tips with Pro</div>`);
  el.style.display="block";try{const rb=$("roastB");if(rb&&rb.offsetHeight&&rb.style.display==="block")el.style.bottom=`calc(${96+rb.offsetHeight}px + env(safe-area-inset-bottom))`}catch(e){}
  clearTimeout(el._t);el._t=setTimeout(hideSwapCard,Math.max(9000,roastMs()+5000))}
 function hideSwapCard(){const el=$("rSwap");if(el){el.style.display="none";clearTimeout(el._t)}}
