@@ -60,6 +60,8 @@ select,input[type=text],input:not([type]){padding:9px;border-radius:8px;border:2
 .avimg{display:block;margin:0 auto;object-fit:contain;background:#fff;border-radius:8px}
 #musPrevWrap{display:flex;align-items:center;gap:8px;margin:8px 0 4px;font-size:13px}
 #renewM{position:fixed;inset:0;background:#000a;display:none;align-items:center;justify-content:center;z-index:25;padding:16px}#renewM .box{background:#fff;color:#111;border-radius:16px;max-width:360px;width:100%;padding:20px;text-align:center;box-shadow:0 10px 30px #0006}#renewM h2{margin:0 0 6px;font-size:20px}#renewM .pr{font-size:28px;font-weight:800;margin:6px 0}#renewM button{width:100%;margin-top:8px}
+#rSwap{display:none;position:fixed;left:50%;transform:translateX(-50%);bottom:calc(180px + env(safe-area-inset-bottom));max-width:340px;width:calc(100% - 32px);background:#fff;color:#0d0d0d;border:3px solid #2e7d32;border-radius:14px;padding:10px 12px;z-index:61;box-shadow:0 6px 20px rgba(0,0,0,.35);font-size:15px}
+#rSwap b{display:block;margin-bottom:4px}#rSwap .rsRow{display:flex;align-items:center;gap:8px;justify-content:space-between;margin:4px 0}#rSwap .swapIt,#rSwap .rsX{padding:6px 10px;font-size:14px;font-weight:800;background:#2e7d32;color:#fff;border:0;border-radius:8px}#rSwap .rsX{background:#eee;color:#0d0d0d;position:absolute;top:6px;right:6px;padding:2px 8px}
 #roastB{position:fixed;left:50%;bottom:calc(88px + env(safe-area-inset-bottom));top:auto;transform:translateX(-50%);max-width:340px;width:calc(100% - 32px);max-height:30vh;overflow:hidden;background:#111;color:#fff;border:3px solid var(--or);border-radius:16px;padding:12px 14px;font-weight:800;font-size:17px;line-height:1.3;text-align:center;z-index:15;opacity:1;pointer-events:none;display:none;box-shadow:0 8px 24px #0006}#roastB:after{content:"";position:absolute;left:50%;bottom:-8px;margin-left:-8px;border:8px solid transparent;border-bottom:0;border-top-color:#111}
 .handwritten{font-family:'Patrick Hand','Indie Flower','Segoe Print','Bradley Hand','Chalkboard SE','Comic Sans MS',cursive;font-size:20px;letter-spacing:.2px}
 input.handwritten::placeholder{font-family:'Patrick Hand','Indie Flower','Segoe Print','Bradley Hand','Chalkboard SE','Comic Sans MS',cursive;font-size:19px}
@@ -74,6 +76,7 @@ input.handwritten::placeholder{font-family:'Patrick Hand','Indie Flower','Segoe 
 .figWrap{position:relative;width:120px;flex:none}.figWrap .figOld{position:absolute;left:0;top:0;width:100%;animation:figOut .7s ease forwards;pointer-events:none}
 #cartFig.stagechg .figNew{animation:figIn .7s ease}#cartFig .stg{display:inline-block;margin-top:2px;font-size:12px;font-weight:800;border-radius:6px;padding:1px 6px;background:var(--bk);color:#fff}#cartFig.stagechg.up .stg{background:#e31837}#cartFig.stagechg.down .stg{background:#0a7a2f}
 @keyframes figIn{0%{opacity:0;transform:scale(.82)}60%{opacity:1;transform:scale(1.07)}100%{opacity:1;transform:none}}@keyframes figOut{0%{opacity:1}100%{opacity:0;transform:scale(1.1)}}
+.avKidsHdr{grid-column:1/-1;font-weight:800;margin-top:6px;padding:6px 8px;border-radius:8px;background:#f3eefe;border:2px dashed #7b3fe4}
 .av.pick{border-color:var(--or);box-shadow:0 0 0 3px var(--or)}.av .pickBtn{width:100%;margin-top:4px}.av.pick .pickBtn{background:var(--bk);color:var(--or)}
 @media (prefers-reduced-motion:reduce){.figWrap .figOld{display:none}#cartFig.stagechg .figNew{animation:none!important}}
 .storechip{width:auto!important;min-width:22px;height:18px!important;border-radius:9px!important;padding:0 5px;color:var(--stt,#fff);font-size:10px;font-weight:800;line-height:14px;text-align:center}
@@ -127,7 +130,7 @@ input.handwritten::placeholder{font-family:'Patrick Hand','Indie Flower','Segoe 
 <button class="goal" data-g="strong">💪 Strong — fuel for activity</button>
 <button class="goal" data-g="bulk">🍗 High-protein / Bulking — scoring reversed: high-protein items (15 g+) and gainers score well; avatar builds muscle</button>
 <button class="goal" data-g="keto">🥑 Keto — rewards low net carbs (5 g or less per serving)</button>
-<p class="note"><b>No weight-loss promises.</b> This app shows food info and ideas only; it is not medical advice.</p></section><section class="card" id="planCard"><h2>Settings, about &amp; plan</h2><label style="display:flex;align-items:center;gap:8px;margin:4px 0 10px"><input type="checkbox" id="roastTgl" checked> 🔥 Roast mode — cheeky one-liners about junk food (never about you)</label><div id="planInfo" class="note"></div><button class="alt" id="planRenew">Renew for $0.99/year (demo)</button><p class="note">Demo only — no payment is taken. Billing via Google Play in the release build.</p><div id="proBox"><h3>⭐ Nutri-Cart Pro — $2.99 upgrade</h3><div id="proInfo" class="note"></div><button id="proBuy">Unlock Pro (demo)</button><button class="alt" id="proRestore">Restore purchase (demo)</button><button class="alt" id="proReset">Reset Pro (demo)</button><p class="note">Demo — billing via Google Play in the release build. No payment is taken here.</p></div></section></div>
+<p class="note"><b>No weight-loss promises.</b> This app shows food info and ideas only; it is not medical advice.</p></section><section class="card" id="planCard"><h2>Settings, about &amp; plan</h2><label style="display:flex;align-items:center;gap:8px;margin:4px 0 10px"><input type="checkbox" id="roastTgl" checked> 🔥 Roast mode — cheeky one-liners about junk food (never about you)</label><label style="display:flex;align-items:center;gap:8px;margin:-4px 0 10px"><input type="checkbox" id="voiceTgl" checked> 🔊 Spoken roast (voice warning after the kazoo)</label><div id="planInfo" class="note"></div><button class="alt" id="planRenew">Renew for $0.99/year (demo)</button><p class="note">Demo only — no payment is taken. Billing via Google Play in the release build.</p><div id="proBox"><h3>⭐ Nutri-Cart Pro — $2.99 upgrade</h3><div id="proInfo" class="note"></div><button id="proBuy">Unlock Pro (demo)</button><button class="alt" id="proRestore">Restore purchase (demo)</button><button class="alt" id="proReset">Reset Pro (demo)</button><p class="note">Demo — billing via Google Play in the release build. No payment is taken here.</p></div></section></div>
 <div class="page" id="teamP"><section class="card"><h2>Consultants</h2>
 <label id="kidsWrap" style="display:flex;align-items:center;gap:8px;margin:4px 0 8px"><input type="checkbox" id="kidsTgl"> Kids mode</label>
 <p class="note" id="kidsNote">Kids mode stores no personal info. Settings stay on this device.</p>
@@ -140,7 +143,7 @@ input.handwritten::placeholder{font-family:'Patrick Hand','Indie Flower','Segoe 
 <div id="bar" role="region" aria-label="Cart totals"><button type="button" id="cartFab" aria-label="Open cart"><svg class="bagSvg" viewBox="0 0 64 64" aria-hidden="true"><rect x="12" y="22" width="40" height="32" rx="8" fill="#0d0d0d"/><path d="M22 22v-6a10 10 0 0 1 20 0v6" fill="none" stroke="#0d0d0d" stroke-width="5" stroke-linecap="round"/><rect x="18" y="26" width="28" height="22" rx="5" fill="#fff"/></svg><span id="cartCount">0</span><span id="cartFabTot">$0.00</span></button><div>Subtotal<b id="bSub">$0.00</b></div><div>Tax<b id="bTax">$0.00</b></div><div class="t">Total <span class="stPill" id="barStore"></span><b id="bTot">$0.00</b></div></div>
 <div id="renewM" role="dialog" aria-modal="true" aria-labelledby="renewT"><div class="box"><h2 id="renewT">Renew Nutri-Cart for $0.99/year</h2><div class="pr">$0.99/year</div><p id="renewMsg" class="note">Your free trial has ended. Renew to keep scanning, roast mode and weight tracking.</p><button class="big" id="renewYes">Renew</button><button class="big alt" id="renewLater">Later</button><p class="note">Demo — billing via Google Play in the release build. No payment is taken here.</p></div></div>
 <div id="proM" role="dialog" aria-modal="true" aria-labelledby="proT"><div class="box"><h2 id="proT">Unlock Nutri-Cart Pro</h2><div class="pr">$2.99</div><p class="note">One-time upgrade on top of the $0.99/year app.</p><ul><li>💡 Healthier nutrition swaps for every junk item</li><li>🥗 Health tips, training fuel guide &amp; swap recipes</li><li>⚖️ Healthier-cart price and calorie comparison</li></ul><button class="big" id="proYes">Unlock Pro (demo)</button><button class="big alt" id="proNo">Not now</button><p class="note">Demo — billing via Google Play in the release build. No payment is taken here.</p></div></div>
-<div id="roastB" role="status" aria-live="polite"></div>
+<div id="roastB" role="status" aria-live="polite"></div><div id="rSwap" role="dialog" aria-label="Healthier swap"></div>
 <div id="weighM" role="dialog" aria-modal="true" aria-labelledby="weighT"><div class="box"><h2 id="weighT"></h2><p class="note" id="weighRate"></p><div style="display:flex;gap:6px;align-items:center"><input id="wIn" type="text" inputmode="decimal" placeholder="Weight" style="flex:1;font-size:20px"><button id="wUnitKg" class="unit on" type="button">kg</button><button id="wUnitLb" class="unit" type="button">lb</button></div><p id="wConv" style="font-weight:700;margin:8px 0"></p><p id="wErr" class="note" style="color:#c00" role="alert"></p><button class="big" id="wAdd">Add to cart</button><button class="big alt" id="wCancel">Cancel</button><p class="note">Estimate only — weigh at the store scale and tap the cart price to correct it.</p></div></div>
 <div id="pantryM" role="alertdialog" aria-modal="true" aria-labelledby="pantryMsg"><div class="box"><h2 id="pantryMsg"></h2><p class="note" id="pantryProd"></p><button class="big" id="pantryAdd">Add anyway</button><button class="big alt" id="pantrySkip">Skip</button></div></div>
 <div id="toast"></div>
@@ -327,7 +330,7 @@ function flyToCart(meta){const ms=cartAnimMs();
 async function commitAdd(item,opts){opts=opts||{};
  cart.push(item);refreshCart();
  await flyToCart({src:opts.src,label:item.n,emoji:item.e});
- if(opts.sound)kazoo(opts.sound);buzz();const rl=opts.roast&&roastOn()?pickRoast(opts.roast):null;if(rl){showRoast(rl);if(opts.swap){const sw=opts.swap;setTimeout(()=>showSwap(sw),roastMs())}}else if(opts.swap)showSwap(opts.swap);if(opts.tick)tickList(item.n);if(opts.toast)toast(opts.toast);
+ if(opts.sound){kazoo(opts.sound);window.__rseq.push("kazoo:"+opts.sound)}buzz();const rl=opts.roast&&roastOn()?pickRoast(opts.roast):null;if(rl){const said=ROAST_OPEN+" "+rl;showRoast(said);setTimeout(()=>sayRoast(said),window.__speakDelay!=null?+window.__speakDelay:600);if(opts.swap)showSwapCard(item,opts.swap);if(opts.swap){const sw=opts.swap;setTimeout(()=>showSwap(sw),roastMs())}}else if(opts.swap)showSwap(opts.swap);if(opts.tick)tickList(item.n);if(opts.toast)toast(opts.toast);
  const fab=$("cartFab");if(fab){fab.classList.remove("pop");void fab.offsetWidth;fab.classList.add("pop")}}
 async function lookup(raw){const code=norm(raw);const d=P[code];
 await Promise.resolve();
@@ -353,7 +356,7 @@ let lastSwap=null;
 function showSwap(d){(window.__seq=window.__seq||[]).push("swap");lastSwap=d;const el=$("swap");el.style.display="block";const bulk=goal==="bulk",L=swapsFor(d);
  if(!proOn()){ /* FREE tier: calorie facts stay free; swaps are Pro. Kids mode never shows an upgrade prompt. */
   el.innerHTML=`<h2>🔥 Calorie facts: ${d.e} ${esc(d.n)}</h2><table><tr><td>${pimg(d.img&&IMG[d.img],d.n,"sm")}</td><td><b>${esc(d.n)}</b></td><td><b>${d.cal} cal</b></td><td class="note">${d.calSrc}</td></tr></table>`+
-  (kidsOn()?`<div class="kidTip">💧 Kid tip: water, fruit and crunchy veggies are great everyday picks!</div>`:
+  (L.length&&rsTarget?`<p class="note">Free pick: ${esc(L[0][0])} · ${L[0][1]} cal — <button type="button" class="swapIt" onclick="swapIt(0)">Swap it</button></p>`:"")+(kidsOn()?`<div class="kidTip">💧 Kid tip: water, fruit and crunchy veggies are great everyday picks!</div>`:
   `<div class="proLock" id="swapLock">🔒 <b>Healthier swaps are a Pro feature</b><br>${L.length?L.length+" swap idea"+(L.length>1?"s":"")+" ready for this item.":"Swap ideas and health tips for every junk item."}<br><button type="button" onclick="showPro()">⭐ Unlock Pro $2.99 (demo)</button></div>`);return}
  el.innerHTML=`<h2>💡 Healthier swaps for ${d.e} ${d.n}</h2><table><tr><td>${pimg(d.img&&IMG[d.img],d.n,"sm")}</td><td><b>${d.n}</b></td><td><b>${d.cal} cal</b></td><td class="note">${d.calSrc}</td></tr>`+
  L.map(([n,c,src,ik])=>`<tr class="alt-row"><td>${pimg(ik&&IMG[ik],n,"sm")}</td><td>→ ${n}</td><td>${c} cal <span class="save">${bulk?"≈"+(SWAP_PROT[n]||0)+" g protein":"saves "+(d.cal-c)+" cal"}</span></td><td class="note">${src}</td></tr>`).join("")+`</table>`+
@@ -567,18 +570,20 @@ const AV=[
  {n:"Tom",key:"tom",f:0,b:.52,skin:"#ffe0bd",hair:"#c47a3a",shirt:"#2bbbad",pants:"#4a5270"}
 ];
 const KID_AV=[
- {n:"Lily",key:"lily",f:1,b:0,kid:true,skin:"#f3c9a8",skinShade:"#e2b089",hair:"#e8c36a",hairShade:"#c99a3a",shirt:"#5b8def",shirtShade:"#3d6fd0",pants:"#3d4460",pantsShade:"#2c3148",shoe:"#2f2f2f",sole:"#d9d9d9",lip:"#d67a7a"},
- {n:"Noah",key:"noah",f:0,b:.55,kid:true,skin:"#c68642",skinShade:"#a86c32",hair:"#3a2316",hairShade:"#1a100a",shirt:"#2bbbad",shirtShade:"#1f8f85",pants:"#2c3348",pantsShade:"#1d2233",shoe:"#2f2f2f",sole:"#d9d9d9",lip:"#a45a48"}
+ {n:"Lily",key:"lily",f:1,b:0,kid:true,skin:"#f3c9a8",skinShade:"#e2b089",hair:"#e8c36a",hairShade:"#c99a3a",shirt:"#7b3fe4",shirtShade:"#5c2bb8",pants:"#5fd3b3",pantsShade:"#3fae90",accent:"#5fd3b3",accent2:"#b89cf5",shoe:"#2f2f2f",sole:"#d9d9d9",lip:"#d67a7a"},
+ {n:"Noah",key:"noah",f:0,b:.55,kid:true,skin:"#c68642",skinShade:"#a86c32",hair:"#3a2316",hairShade:"#1a100a",shirt:"#8bc34a",shirtShade:"#689f38",pants:"#1e4fd8",pantsShade:"#163aa6",accent:"#1e4fd8",accent2:"#8bc34a",shoe:"#2f2f2f",sole:"#d9d9d9",lip:"#a45a48"}
 ];
 const KIDS_K="fuelcart_kids_v1";
 function kidsOn(){try{return localStorage.getItem(KIDS_K)==="1"}catch(e){return false}}
 function setKids(on){try{localStorage.setItem(KIDS_K,on?"1":"0")}catch(e){}const t=$("kidsTgl");if(t)t.checked=!!on;renderAvatars();try{cartAvatar()}catch(e){}try{renderPro()}catch(e){}}
-function avatars(){return kidsOn()?AV.concat(KID_AV):AV}
+function avatars(){return AV.concat(KID_AV)}
 /* Picked consultant (localStorage fuelcart_av_v1 = avatar key only; no personal data). Default Dev; kids mode uses the picked kid or Lily. */
 const AV_K="fuelcart_av_v1";
 function pickedKey(){try{return localStorage.getItem(AV_K)||""}catch(e){return ""}}
 function selectedAvatar(){const k=pickedKey();if(kidsOn())return KID_AV.find(a=>a.key===k)||KID_AV[0];return AV.find(a=>a.key===k)||AV[2]}
-function pickAv(key){if(!AV.concat(KID_AV).some(a=>a.key===key))return;try{localStorage.setItem(AV_K,key)}catch(e){}renderAvatars();try{cartAvatar()}catch(e){}
+function pickAv(key){if(!AV.concat(KID_AV).some(a=>a.key===key))return;const isKid=KID_AV.some(a=>a.key===key);
+ if(!isKid&&kidsOn()){if(typeof toast==="function")toast("Kids mode is on — a grown-up can turn it off in Settings to pick an adult consultant");return}
+ try{localStorage.setItem(AV_K,key)}catch(e){}if(isKid&&!kidsOn()){setKids(true);if(typeof toast==="function")setTimeout(()=>toast("Kids mode on: kid-safe roasts, no personal info stored"),1200)}renderAvatars();try{cartAvatar()}catch(e){}
  const a=AV.concat(KID_AV).find(x=>x.key===key);if(a&&typeof toast==="function")toast(`${a.n} is your cart consultant`)}
 let teamSync=null;
 function syncTeam(who,st,mus){teamSync={who:who.key,st,mus:!!mus};const list=avatars(),i=list.findIndex(a=>a.key===who.key);if(i<0)return;const a=list[i];
@@ -640,15 +645,15 @@ function kidFaceSvg(a,stage){
 }
 function kidBackSvg(a,stage){
   const g=kidGeom(a),{cx,shY,shW,headCy,shortBot,ankleY}=g;let out="";
-  if(stage>=3){out+=`<path d="M ${cx-10} ${shY-2} L ${cx+10} ${shY-2} C ${cx+shW+16} ${shY+24}, ${cx+shW+20} ${shortBot}, ${cx+shW+8} ${ankleY-6} Q ${cx+4} ${shortBot+8} ${cx} ${shortBot+2} Q ${cx-4} ${shortBot+8} ${cx-shW-8} ${ankleY-6} C ${cx-shW-20} ${shortBot}, ${cx-shW-16} ${shY+24}, ${cx-10} ${shY-2} Z" fill="#ff6a00"/><path d="M ${cx} ${shY+4} L ${cx+8} ${ankleY-16} Q ${cx} ${ankleY-4} ${cx-8} ${ankleY-16} Z" fill="#c35000" opacity="0.28"/>`}
-  if(stage>=4){out+=`<ellipse cx="${cx}" cy="${headCy+46}" rx="62" ry="92" fill="none" stroke="#ffb14a" stroke-width="3" opacity="0.65"/><ellipse cx="${cx}" cy="${headCy+46}" rx="70" ry="102" fill="none" stroke="#ff6a00" stroke-width="2" opacity="0.35"/>`}
+  if(stage>=3){out+=`<path d="M ${cx-10} ${shY-2} L ${cx+10} ${shY-2} C ${cx+shW+16} ${shY+24}, ${cx+shW+20} ${shortBot}, ${cx+shW+8} ${ankleY-6} Q ${cx+4} ${shortBot+8} ${cx} ${shortBot+2} Q ${cx-4} ${shortBot+8} ${cx-shW-8} ${ankleY-6} C ${cx-shW-20} ${shortBot}, ${cx-shW-16} ${shY+24}, ${cx-10} ${shY-2} Z" fill="${a.accent||'#1e4fd8'}"/><path d="M ${cx} ${shY+4} L ${cx+8} ${ankleY-16} Q ${cx} ${ankleY-4} ${cx-8} ${ankleY-16} Z" fill="#c35000" opacity="0.28"/>`}
+  if(stage>=4){out+=`<ellipse cx="${cx}" cy="${headCy+46}" rx="62" ry="92" fill="none" stroke="${a.accent2||'#8bc34a'}" stroke-width="3" opacity="0.65"/><ellipse cx="${cx}" cy="${headCy+46}" rx="70" ry="102" fill="none" stroke="${a.accent||'#1e4fd8'}" stroke-width="2" opacity="0.35"/>`}
   return `<g id="kid-back" data-stage="${stage}">${out}</g>`;
 }
 function kidFrontSvg(a,stage){
   const g=kidGeom(a),{cx,headCx,headCy,headR,shY,shW,armLen,footY}=g;let out="";
-  if(stage>=2){out+=`<path d="M ${headCx-headR+1} ${headCy-6} Q ${headCx} ${headCy-10}, ${headCx+headR-1} ${headCy-6} L ${headCx+headR-1} ${headCy+1} Q ${headCx} ${headCy-3}, ${headCx-headR+1} ${headCy+1} Z" fill="#fff" stroke="#d0d0d0" stroke-width="0.5"/><path d="M ${headCx-headR+2} ${headCy-3} Q ${headCx} ${headCy-6.5}, ${headCx+headR-2} ${headCy-3} L ${headCx+headR-2} ${headCy-0.5} Q ${headCx} ${headCy-4}, ${headCx-headR+2} ${headCy-0.5} Z" fill="#ff6a00"/>`;
+  if(stage>=2){out+=`<path d="M ${headCx-headR+1} ${headCy-6} Q ${headCx} ${headCy-10}, ${headCx+headR-1} ${headCy-6} L ${headCx+headR-1} ${headCy+1} Q ${headCx} ${headCy-3}, ${headCx-headR+1} ${headCy+1} Z" fill="#fff" stroke="#d0d0d0" stroke-width="0.5"/><path d="M ${headCx-headR+2} ${headCy-3} Q ${headCx} ${headCy-6.5}, ${headCx+headR-2} ${headCy-3} L ${headCx+headR-2} ${headCy-0.5} Q ${headCx} ${headCy-4}, ${headCx-headR+2} ${headCy-0.5} Z" fill="${a.accent||'#1e4fd8'}"/>`;
     const wy=shY+armLen-5;
-    out+=`<rect x="${cx-shW-11}" y="${wy}" width="10" height="5" rx="1.5" fill="#fff" stroke="#ff6a00" stroke-width="1.2"/><rect x="${cx+shW+1}" y="${wy}" width="10" height="5" rx="1.5" fill="#fff" stroke="#ff6a00" stroke-width="1.2"/>`;
+    out+=`<rect x="${cx-shW-11}" y="${wy}" width="10" height="5" rx="1.5" fill="#fff" stroke="${a.accent||'#1e4fd8'}" stroke-width="1.2"/><rect x="${cx+shW+1}" y="${wy}" width="10" height="5" rx="1.5" fill="#fff" stroke="${a.accent||'#1e4fd8'}" stroke-width="1.2"/>`;
     out+=`<circle cx="${cx+36}" cy="${footY-6}" r="8" fill="#f7f7f7" stroke="#222" stroke-width="1.1"/><path d="M ${cx+36} ${footY-13} L ${cx+39.5} ${footY-7} L ${cx+36} ${footY-1} L ${cx+32.5} ${footY-7} Z" fill="#222"/><path d="M ${cx+29} ${footY-6} Q ${cx+36} ${footY-9} ${cx+43} ${footY-6}" fill="none" stroke="#222" stroke-width="0.7"/>`}
   if(stage>=4){const stars=[[cx-52,headCy-16,6],[cx+54,headCy-6,5],[cx-44,headCy+74,5],[cx+50,headCy+66,6],[cx-18,headCy-44,4],[cx+20,headCy-42,5],[cx-56,headCy+30,4],[cx+58,headCy+28,4]];for(const [x,y,r] of stars)out+=`<path d="M ${x} ${y-r} L ${x+1.15} ${y-1.15} L ${x+r} ${y} L ${x+1.15} ${y+1.15} L ${x} ${y+r} L ${x-1.15} ${y+1.15} L ${x-r} ${y} L ${x-1.15} ${y-1.15} Z" fill="#ffcf33"/>`}
   return `<g id="kid-front" data-stage="${stage}">${out}</g>`;
@@ -675,7 +680,7 @@ function musOn(){const m=$("musPrev");return !!(m&&m.checked)}
 function renderAvatars(){
   const list=avatars();
   const sel=selectedAvatar().key;
-  $("avs").innerHTML=list.map((a,i)=>`<div class="av${a.key===sel?" pick":""}" data-key="${a.key}"><div id="f${i}">${fig(a,0)}</div><div><b>${a.n}</b></div><input type="range" min="0" max="4" value="0" oninput="st(${i},+this.value)" style="width:100%"><div class="note" id="s${i}">${a.kid?KID_LBL[0]:LBL[0]}</div><button type="button" class="pickBtn" onclick="pickAv('${a.key}')">${a.key===sel?"✓ In your cart":"Pick"}</button></div>`).join("");
+  $("avs").innerHTML=list.map((a,i)=>(a.kid&&!(list[i-1]&&list[i-1].kid)?`<div class="avKidsHdr" id="avKidsHdr">🧒 Kids — picking one turns on Kids mode (kid-safe roasts, food-only). No name, age or photo stored.</div>`:"")+`<div class="av${a.key===sel?" pick":""}" data-key="${a.key}"><div id="f${i}">${fig(a,0)}</div><div><b>${a.n}</b></div><input type="range" min="0" max="4" value="0" oninput="st(${i},+this.value)" style="width:100%"><div class="note" id="s${i}">${a.kid?KID_LBL[0]:LBL[0]}</div><button type="button" class="pickBtn" onclick="pickAv('${a.key}')">${a.key===sel?"✓ In your cart":"Pick"}</button></div>`).join("");
   if(teamSync&&teamSync.who===sel){const s=selectedAvatar();try{syncTeam(s,teamSync.st,teamSync.mus)}catch(e){}}
   const n=$("avNote");if(n)n.textContent=kidsOn()?KID_NOTE:AV_NOTE;
   const kn=$("kidsNote");if(kn)kn.textContent="Kids mode stores no personal info. Settings stay on this device.";
@@ -737,20 +742,20 @@ renderPro();
 window.__pro={proOn,setPro,showPro,unlockPro,restorePro,resetPro,PRO_K,PRO_PRICE};
 /* ROAST MODE (owner-approved tone): jokes punch at the FOOD and its effect, never at a person's identity, body as a person, or disability. No weight-loss promises. */
 const ROAST={
- "777550013599":["Twinkie gut loading… 87% 🧁","Twinkies: sponge cake with a cream-filled alibi.","This snack will outlast the shopping trip. And the sugar crash."],
- "064100130920":["Pop-Tarts: frosting cosplaying as breakfast 🥧","Toaster pastry, express lane to a 10 a.m. sugar crash.","That 'strawberry' filling met a strawberry once. Maybe."],
- "069052129480":["Pizza Pops: speed-running the soft middle 🍕","Lava-core cheese pocket. Your tongue is filing a complaint.","Four pockets of pure microwave courage."],
- "069192000199":["Corn dog? Okay, pork chop, live a little — but peep the swap 🌭","A hot dog in a batter sleeping bag. Cozy, not fuel.","Deep-fried confidence on a stick."],
- "060410071953":["Doritos dust: the pear-shape starter pack 🌮","Orange fingertips: the official badge of the snack aisle.","Forty-five grams of crunch, zero grams of chill."],
- "067000104022":["Coke: sugar's favourite delivery truck 🥤","Liquid candy in a fizzy disguise.","That bottle is sweeter than a birthday group chat."],
- "4001686344965":["Gummy bears: tiny, cute, and plotting a soft middle 🍬","Haribo: sugar, but make it adorable.","These bears travel in packs. So does the sugar."],
- "611269818994":["Red Bull gives you wings… and a 3 p.m. crash landing ⚡","Caffeine + sugar in a can: borrowed energy, interest due later.","Wings not included. Jitters are."],
- "052000208085":["Gatorade for the walk to the car? The sweat budget says no 🧃","Sports drink, couch sport. Water's on line one."],
- "631656711455":["Mass gainer: 'gaining' is literally in the job description 💪","That tub means business — make sure your goal does too."],
- "627735262499":["Sour gummy worms: sugar wiggling straight to the soft middle 🪱","Sour first, sweet second, sugar crash third.","Worms in a bag. Even the early bird would pass."],
- "PLU-gummies":["Bulk-bin gummies: scooping your way to a twinkie gut 🍬","Self-serve sugar. The scoop is not a serving size.","Those bears are sold by the kilo for a reason."]
+ "777550013599":["That Twinkie is going straight to your belly.","Twinkie gut loading… 87% 🧁","Twinkies: sponge cake with a cream-filled alibi."],
+ "064100130920":["That frosting is headed straight for your soft middle.","Pop-Tarts: frosting cosplaying as breakfast 🥧","Toaster pastry, express lane to a 10 a.m. sugar crash."],
+ "069052129480":["That's going straight to your belly.","Pizza Pops: speed-running the soft middle 🍕","Lava-core cheese pocket. Your tongue is filing a complaint."],
+ "069192000199":["That's going to shape you like a pear.","Corn dog? Okay, pork chop, live a little — but peep the swap 🌭","A hot dog in a batter sleeping bag. Cozy, not fuel."],
+ "060410071953":["That's going to shape you like a pear.","Doritos dust: the pear-shape starter pack 🌮","Orange fingertips: the official badge of the snack aisle."],
+ "067000104022":["That sugar is going straight to your belly.","Coke: sugar's favourite delivery truck 🥤","Liquid candy in a fizzy disguise."],
+ "4001686344965":["Those bears are moving into your soft middle.","Gummy bears: tiny, cute, and plotting a soft middle 🍬","Haribo: sugar, but make it adorable."],
+ "611269818994":["That sugar rush is going straight to your belly.","Red Bull gives you wings… and a 3 p.m. crash landing ⚡","Caffeine + sugar in a can: borrowed energy, interest due later."],
+ "052000208085":["Unless you're running laps, that's going straight to your belly.","Gatorade for the walk to the car? The sweat budget says no 🧃","Sports drink, couch sport. Water's on line one."],
+ "631656711455":["Only if your goal is gaining — otherwise that's going straight to your belly.","Mass gainer: 'gaining' is literally in the job description 💪","That tub means business — make sure your goal does too."],
+ "627735262499":["Those worms are wiggling straight to your belly.","Sour gummy worms: sugar wiggling straight to the soft middle 🪱","Sour first, sweet second, sugar crash third."],
+ "PLU-gummies":["That scoop is going straight to your soft middle.","Bulk-bin gummies: scooping your way to a twinkie gut 🍬","Self-serve sugar. The scoop is not a serving size."]
 };
-const ROAST_GENERIC=["Kazoo says: this one's a treat, not a plan 🎺","Snack aisle 1, healthy cart 0. Comeback swap below.","Bold pick. Your future self has questions.","Treat detected. Peep the swap before it gets comfy in the cart."];
+const ROAST_GENERIC=["That's going straight to your belly.","Kazoo says: this one's a treat, not a plan 🎺","Snack aisle 1, healthy cart 0. Comeback swap below.","Bold pick. Your future self has questions.","Treat detected. Peep the swap before it gets comfy in the cart."];
 const ROAST_K="fuelcart_roast_v1",roastLast={};
 function roastOn(){try{return localStorage.getItem(ROAST_K)!=="0"}catch(e){return true}}
 function setRoast(on){try{localStorage.setItem(ROAST_K,on?"1":"0")}catch(e){}const t=$("roastTgl");if(t)t.checked=!!on}
@@ -773,8 +778,28 @@ function roastPool(code){return kidsOn()?(ROAST_KIDS[code]||ROAST_KIDS_GENERIC):
 function pickRoast(code){const pool=roastPool(code),k=ROAST[code]?code:"_generic";let i=Math.floor(Math.random()*pool.length);if(pool.length>1&&i===roastLast[k])i=(i+1+Math.floor(Math.random()*(pool.length-1)))%pool.length;roastLast[k]=i;return pool[i]}
 const ROAST_SHOW_MS=3600;
 function roastMs(){return window.__roastMs!=null?+window.__roastMs:ROAST_SHOW_MS}
+const VOICE_K="fuelcart_voice_v1",ROAST_OPEN="Uh-uh-uh, don't put that in your cart!";
+function voiceOn(){try{return localStorage.getItem(VOICE_K)!=="0"}catch(e){return true}}
+function setVoice(on){try{localStorage.setItem(VOICE_K,on?"1":"0")}catch(e){}const t=$("voiceTgl");if(t)t.checked=!!on;if(!on)try{window.speechSynthesis&&window.speechSynthesis.cancel()}catch(e){}}
+function plainSpeech(t){return String(t).replace(/[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}\u{200D}]/gu,"").replace(/…/g,", ").replace(/\s+/g," ").trim()}
+window.__spoken=[];window.__rseq=[];
+/* Spoken warning (Web Speech synthesis, en-CA). Respects Roast mode + the voice toggle; silently skipped where unsupported. */
+function sayRoast(text){window.__rseq.push("speak");if(!roastOn()||!voiceOn())return false;const ss=window.speechSynthesis,U=window.SpeechSynthesisUtterance;if(!ss||!U){window.__spoken.push({text,unsupported:true});return false}
+ try{ss.cancel();const u=new U(plainSpeech(text));u.lang="en-CA";u.rate=1.05;u.pitch=1.1;const vs=(ss.getVoices&&ss.getVoices())||[];const v=vs.find(x=>/en[-_]CA/i.test(x.lang))||vs.find(x=>/^en/i.test(x.lang));if(v)u.voice=v;ss.speak(u);window.__spoken.push({text:u.text,lang:u.lang});return true}catch(e){return false}}
+/* Swap card at roast time: free users get 1 swap, Pro gets 2 (full list + health tips stay in the Pro swap panel). */
+const SWAP_TAX={"Coca-Cola Zero Sugar 355 mL":12,"Red Bull Sugarfree 250 mL":12,"Sparkling water with lime":5,"Gatorade Zero 591 mL":5};
+let rsTarget=null,rsList=[];
+function showSwapCard(item,d){window.__rseq.push("swapcard");const el=$("rSwap");if(!el||!d)return;const L=swapsFor(d).slice(0,proOn()?2:1);rsTarget=item;rsList=L;if(!L.length){el.style.display="none";return}
+ el.innerHTML=`<button type="button" class="rsX" onclick="hideSwapCard()" aria-label="Close">✕</button><b>💡 Try this instead${proOn()?"":" (free pick)"}</b>`+L.map((x,i)=>`<div class="rsRow"><span>→ ${esc(x[0])} · ${x[1]} cal${SWAP_PRICE[x[0]]!=null?" · ~"+fmt(SWAP_PRICE[x[0]]):""}</span><button type="button" class="swapIt" data-i="${i}" onclick="swapIt(${i})">Swap it</button></div>`).join("")+(proOn()||kidsOn()?"":`<div class="note">More swaps + health tips with Pro</div>`);
+ el.style.display="block";try{const rb=$("roastB");if(rb&&rb.offsetHeight&&rb.style.display==="block")el.style.bottom=`calc(${96+rb.offsetHeight}px + env(safe-area-inset-bottom))`}catch(e){}
+ clearTimeout(el._t);el._t=setTimeout(hideSwapCard,Math.max(9000,roastMs()+5000))}
+function hideSwapCard(){const el=$("rSwap");if(el){el.style.display="none";clearTimeout(el._t)}}
+function swapIt(i){const x=rsList[i],idx=cart.indexOf(rsTarget);if(!x||idx<0){hideSwapCard();return false}const old=cart[idx];
+ const it={code:"SWAP-"+x[0].toLowerCase().replace(/[^a-z0-9]+/g,"-"),n:x[0],e:"🥗",p:SWAP_PRICE[x[0]]!=null?SWAP_PRICE[x[0]]:old.p,tax:SWAP_TAX[x[0]]!=null?SWAP_TAX[x[0]]:0,v:null,cal:+x[1]||0,prot:SWAP_PROT[x[0]]||0,est:true,swapped:old.n,isNew:true};
+ cart.splice(idx,1,it);hideSwapCard();rsTarget=null;const b=$("roastB");if(b){b.style.display="none"}render();kazoo("happy");toast(`🔄 Swapped ${esc(old.n.split(" ").slice(0,3).join(" "))} → ${esc(x[0])}`);return true}
 function showRoast(line){(window.__seq=window.__seq||[]).push("roast");const b=$("roastB");if(!b)return;b.textContent=line;b.style.display="block";clearTimeout(b._t);b._t=setTimeout(()=>{b.style.display="none"},roastMs())}
 {const t=$("roastTgl");if(t){t.checked=roastOn();t.onchange=()=>setRoast(!!t.checked)}}
-window.__roast={ROAST,ROAST_GENERIC,pickRoast,roastOn,setRoast,roastPool};
+{const t=$("voiceTgl");if(t){t.checked=voiceOn();t.onchange=()=>setVoice(!!t.checked)}}
+window.__roast={ROAST,ROAST_GENERIC,pickRoast,roastOn,setRoast,roastPool,ROAST_OPEN,sayRoast,voiceOn,setVoice,swapIt,showSwapCard};
 
 </script></body></html>
